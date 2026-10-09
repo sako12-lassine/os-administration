@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Управление процессами" />
+  <title>Лабораторная работа № 6</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Лабораторная работа № 6</h1>
+<p class="author">Управление процессами</p>
+<p class="date">SACKO LASSINÉ</p>
+</header>
+<hr />
+<h1 id="цель-работы">Цель работы</h1>
+<ul>
+<li>Изучить основные средства управления процессами в Linux.</li>
+<li>Научиться управлять заданиями оболочки.</li>
+<li>Изучить приоритеты процессов и сигналы.</li>
+<li>Освоить команды <code>ps</code>, <code>jobs</code>, <code>fg</code>,
+<code>bg</code>, <code>kill</code>, <code>nice</code>,
+<code>renice</code> и <code>nohup</code>.</li>
+</ul>
+<hr />
+<h1 id="основные-задачи">Основные задачи</h1>
+<p>В ходе лабораторной работы изучены:</p>
+<ul>
+<li>Управление заданиями в фоновом и foreground-режиме.</li>
+<li>Просмотр процессов и их иерархии.</li>
+<li>Изменение приоритетов процессов.</li>
+<li>Завершение процессов и отправка сигналов.</li>
+<li>Запуск процессов, продолжающих работу после закрытия терминала.</li>
+</ul>
+<hr />
+<h1 id="управление-заданиями">1. Управление заданиями</h1>
+<p>Основные команды:</p>
+<ul>
+<li><code>jobs</code> — просмотр заданий текущей оболочки.</li>
+<li><code>Ctrl+Z</code> — приостановка foreground-задания.</li>
+<li><code>bg</code> — продолжение задания в фоновом режиме.</li>
+<li><code>fg</code> — возврат задания в foreground.</li>
+<li><code>Ctrl+C</code> — прерывание текущего задания.</li>
+</ul>
+<figure>
+<img src="../Скриншоты/02_jobs.png" alt="Управление заданиями" />
+<figcaption aria-hidden="true">Управление заданиями</figcaption>
+</figure>
+<hr />
+<h1 id="просмотр-процессов">2. Просмотр процессов</h1>
+<p>Команды для анализа процессов:</p>
+<ul>
+<li><code>ps aux</code> — просмотр списка процессов.</li>
+<li><code>top</code> — интерактивный мониторинг процессов.</li>
+<li><code>ps fax</code> — просмотр иерархии процессов.</li>
+<li><code>grep</code> — поиск процессов по имени в выводе команды.</li>
+</ul>
+<figure>
+<img src="../Скриншоты/06_top_dd.png" alt="Мониторинг процессов" />
+<figcaption aria-hidden="true">Мониторинг процессов</figcaption>
+</figure>
+<hr />
+<h1 id="приоритеты-процессов">3. Приоритеты процессов</h1>
+<ul>
+<li><code>nice</code> — запуск процесса с заданным значением nice.</li>
+<li><code>renice</code> — изменение приоритета уже запущенного
+процесса.</li>
+<li>Чем выше значение nice, тем ниже приоритет планирования CPU.</li>
+<li>Отрицательные значения nice повышают приоритет и обычно требуют прав
+администратора.</li>
+</ul>
+<p>Пример:</p>
+<p><code>renice -n 5 -p PID</code></p>
+<figure>
+<img src="../Скриншоты/08_renice.png" alt="Изменение приоритета" />
+<figcaption aria-hidden="true">Изменение приоритета</figcaption>
+</figure>
+<hr />
+<h1 id="завершение-процессов">4. Завершение процессов</h1>
+<p>Для управления процессами применяются:</p>
+<ul>
+<li><code>kill PID</code> — отправка сигнала процессу.</li>
+<li><code>kill -9 PID</code> — принудительное завершение процесса.</li>
+<li><code>killall имя</code> — отправка сигнала процессам с указанным
+именем.</li>
+<li><code>top</code> — интерактивный просмотр и завершение
+процессов.</li>
+</ul>
+<p>Перед завершением необходимо проверить PID и убедиться, что выбран
+нужный процесс.</p>
+<figure>
+<img src="../Скриншоты/22_kill_pid_job.png"
+alt="Завершение процессов" />
+<figcaption aria-hidden="true">Завершение процессов</figcaption>
+</figure>
+<hr />
+<h1 id="фоновые-процессы-и-nohup">5. Фоновые процессы и nohup</h1>
+<ul>
+<li>Символ <code>&amp;</code> запускает команду в фоновом режиме.</li>
+<li><code>nohup</code> позволяет процессу продолжить работу после
+закрытия терминала в обычных условиях.</li>
+<li><code>kill</code> позволяет отправлять сигналы отдельным
+процессам.</li>
+<li><code>killall</code> помогает завершить несколько процессов с
+одинаковым именем.</li>
+</ul>
+<figure>
+<img src="../Скриншоты/20_nohup.png" alt="Работа с nohup" />
+<figcaption aria-hidden="true">Работа с nohup</figcaption>
+</figure>
+<hr />
+<h1 id="результаты-работы">Результаты работы</h1>
+<p>В ходе лабораторной работы выполнены практические задания по:</p>
+<ul>
+<li>управлению заданиями оболочки;</li>
+<li>просмотру процессов и их иерархии;</li>
+<li>изменению приоритетов;</li>
+<li>завершению процессов и отправке сигналов;</li>
+<li>запуску фоновых процессов и использованию <code>nohup</code>.</li>
+</ul>
+<p>Практические действия зафиксированы на скриншотах.</p>
+<hr />
+<h1 id="заключение">Заключение</h1>
+<p>Цель лабораторной работы достигнута.</p>
+<p>Получены практические навыки управления процессами в Linux, работы с
+фоновыми заданиями, изменения приоритетов, отправки сигналов и анализа
+состояния системы.</p>
+<p>Спасибо за внимание!</p>
+</body>
+</html>
