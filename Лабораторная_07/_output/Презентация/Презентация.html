@@ -214,73 +214,113 @@ SACKO LASSINÉ
 <nav role="doc-toc"> 
 <h2 id="toc-title">Содержание</h2>
 <ul>
-<li><a href="#/цель-работы" id="/toc-цель-работы">Цель работы</a></li>
-<li><a href="#/мониторинг-событий" id="/toc-мониторинг-событий">1. Мониторинг событий</a></li>
-<li><a href="#/настройка-rsyslog-и-apache" id="/toc-настройка-rsyslog-и-apache">2. Настройка rsyslog и Apache</a></li>
-<li><a href="#/проверка-конфигурации" id="/toc-проверка-конфигурации">3. Проверка конфигурации</a></li>
-<li><a href="#/работа-с-journalctl" id="/toc-работа-с-journalctl">4. Работа с journalctl</a></li>
-<li><a href="#/постоянное-хранение-journald" id="/toc-постоянное-хранение-journald">5. Постоянное хранение journald</a></li>
+<li><a href="#/цель-работы" id="/toc-цель-работы">Цель работы</a>
+<ul>
+<li><a href="#/мониторинг-системных-событий" id="/toc-мониторинг-системных-событий">1. Мониторинг системных событий</a></li>
+<li><a href="#/проверка-регистрации-сообщений" id="/toc-проверка-регистрации-сообщений">2. Проверка регистрации сообщений</a></li>
+<li><a href="#/настройка-rsyslog-и-apache" id="/toc-настройка-rsyslog-и-apache">3. Настройка rsyslog и Apache</a></li>
+<li><a href="#/проверка-конфигурации" id="/toc-проверка-конфигурации">4. Проверка конфигурации</a></li>
+<li><a href="#/работа-с-journalctl" id="/toc-работа-с-journalctl">5. Работа с journalctl</a></li>
+<li><a href="#/постоянное-хранение-journald" id="/toc-постоянное-хранение-journald">6. Постоянное хранение journald</a></li>
+
+</ul></li>
 <li><a href="#/вывод" id="/toc-вывод">Вывод</a></li>
 </ul>
 </nav>
 </section>
-<section id="цель-работы" class="slide level2">
-<h2>Цель работы</h2>
-<p>Получить практические навыки работы с системными журналами Linux.</p>
-<p>Основные задачи:</p>
+<section>
+<section id="цель-работы" class="title-slide slide level1 center">
+<h1>Цель работы</h1>
+<p>Получить практические навыки мониторинга системных событий Linux.</p>
 <ul>
-<li>мониторинг событий;</li>
-<li>настройка rsyslog;</li>
-<li>использование journalctl;</li>
-<li>постоянное хранение журналов.</li>
+<li>Мониторинг журналов в реальном времени</li>
+<li>Настройка <code>rsyslog</code> и Apache</li>
+<li>Анализ событий с помощью <code>journalctl</code></li>
+<li>Постоянное хранение журналов <code>journald</code></li>
 </ul>
 </section>
-<section id="мониторинг-событий" class="slide level2">
-<h2>1. Мониторинг событий</h2>
-<p>Для наблюдения за системными сообщениями используется команда:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-label="1"></a><span class="fu">tail</span> <span class="at">-f</span> /var/log/messages</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Для создания тестовых сообщений применяется команда:</p>
+<section id="мониторинг-системных-событий" class="slide level2">
+<h2>1. Мониторинг системных событий</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-label="1"></a><span class="fu">tail</span> <span class="at">-f</span> /var/log/messages</span>
+<span id="cb1-2"><a href="" aria-label="2"></a><span class="ex">logger</span> hello</span>
+<span id="cb1-3"><a href="" aria-label="3"></a><span class="fu">tail</span> <span class="at">-n</span> 20 /var/log/secure</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Команды позволяют наблюдать системные сообщения и проверять журнал безопасности.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Скриншоты/01_Мониторинг_системных_событий.png" style="width:100.0%"></p>
+</div></div>
+</section>
+<section id="проверка-регистрации-сообщений" class="slide level2">
+<h2>2. Проверка регистрации сообщений</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-label="1"></a><span class="ex">logger</span> hello</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Журнал безопасности проверяется с помощью <code>/var/log/secure</code>.</p>
+<p>Команда <code>logger</code> отправляет тестовое сообщение в системный журнал. Результат проверяется в терминале мониторинга.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Скриншоты/02_Проверка_logger.png" style="width:100.0%"></p>
+</div></div>
 </section>
 <section id="настройка-rsyslog-и-apache" class="slide level2">
-<h2>2. Настройка rsyslog и Apache</h2>
-<p>Для передачи сообщений Apache в системный журнал используется правило:</p>
+<h2>3. Настройка rsyslog и Apache</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Конфигурация Apache:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="" aria-label="1"></a>ErrorLog syslog:local1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>В <code>/etc/rsyslog.d/httpd.conf</code> задаётся:</p>
+<p>Правило <code>/etc/rsyslog.d/httpd.conf</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="" aria-label="1"></a>local1.* -/var/log/httpd-error.log</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Отладочные сообщения можно направлять в отдельный файл.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Скриншоты/03_Настройка_rsyslog_Apache.png" style="width:100.0%"></p>
+</div></div>
 </section>
 <section id="проверка-конфигурации" class="slide level2">
-<h2>3. Проверка конфигурации</h2>
-<p>После изменения конфигурации проверяются настройки и состояние служб:</p>
+<h2>4. Проверка конфигурации</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-label="1"></a><span class="ex">rsyslogd</span> <span class="at">-N1</span></span>
 <span id="cb5-2"><a href="" aria-label="2"></a><span class="ex">systemctl</span> status rsyslog</span>
 <span id="cb5-3"><a href="" aria-label="3"></a><span class="ex">systemctl</span> status httpd</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Результаты проверяются по фактическим сообщениям в журналах.</p>
+<p>Проверяются корректность конфигурации и состояние служб.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Скриншоты/04_Проверка_файлов_журналов.png" style="width:100.0%"></p>
+</div></div>
 </section>
 <section id="работа-с-journalctl" class="slide level2">
-<h2>4. Работа с journalctl</h2>
-<p>Основные команды:</p>
+<h2>5. Работа с journalctl</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="" aria-label="1"></a><span class="ex">journalctl</span> <span class="at">-n</span> 20</span>
 <span id="cb6-2"><a href="" aria-label="2"></a><span class="ex">journalctl</span> <span class="at">-p</span> err</span>
 <span id="cb6-3"><a href="" aria-label="3"></a><span class="ex">journalctl</span> <span class="at">-b</span></span>
 <span id="cb6-4"><a href="" aria-label="4"></a><span class="ex">journalctl</span> <span class="at">-f</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Они позволяют просматривать последние записи, ошибки, события текущей загрузки и новые сообщения в реальном времени.</p>
+<p>Команды позволяют просматривать последние записи, ошибки и события в реальном времени.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Скриншоты/05_Работа_с_journalctl.png" style="width:100.0%"></p>
+</div></div>
 </section>
 <section id="постоянное-хранение-journald" class="slide level2">
-<h2>5. Постоянное хранение journald</h2>
-<p>Для хранения журналов используется каталог:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="" aria-label="1"></a><span class="ex">/var/log/journal</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Проверяются права доступа, использование дискового пространства и наличие записей.</p>
-<p>Постоянство хранения подтверждается проверкой после перезагрузки.</p>
+<h2>6. Постоянное хранение journald</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Каталог для постоянного хранения:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href="" aria-label="1"></a>/var/log/journal</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Проверяются права доступа и состояние журнала. Сохранение между перезагрузками требует отдельной проверки.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Скриншоты/06_Постоянное_хранение_journald.png" style="width:100.0%"></p>
+</div></div>
 </section>
-<section id="вывод" class="slide level2">
-<h2>Вывод</h2>
-<p>В ходе работы рассмотрены инструменты мониторинга системных событий Linux.</p>
-<p>Изучены настройка rsyslog, регистрация сообщений Apache, фильтрация журналов с помощью journalctl и организация постоянного хранения journald.</p>
-<p>Полученные навыки помогают анализировать состояние системы и диагностировать ошибки.</p>
-<p>Спасибо за внимание!</p>
+<section class="slide level2">
+
+</section></section>
+<section id="вывод" class="title-slide slide level1 center">
+<h1>Вывод</h1>
+<ul>
+<li>Изучен мониторинг системных событий Linux.</li>
+<li>Рассмотрена настройка <code>rsyslog</code> и Apache.</li>
+<li>Изучены фильтрация и просмотр журналов с помощью <code>journalctl</code>.</li>
+<li>Рассмотрено постоянное хранение <code>journald</code>.</li>
+</ul>
+<p><strong>Спасибо за внимание!</strong></p>
 
 </section>
     </div>
@@ -464,9 +504,9 @@ SACKO LASSINÉ
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
