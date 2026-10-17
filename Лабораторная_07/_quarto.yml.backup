@@ -1,0 +1,10 @@
+project:
+  type: default
+
+format:
+  docx:
+    toc: true
+    number-sections: true
+  pdf:
+    toc: true
+    number-sections: true

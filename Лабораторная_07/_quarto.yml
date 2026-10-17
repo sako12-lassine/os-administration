@@ -1,0 +1,24 @@
+project:
+  title: "Лабораторная работа № 7"
+  output-dir: "_output"
+
+lang: ru-RU
+number-sections: false
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+
+format:
+  docx:
+    toc: true
+  pdf:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+    toc: true
+    toc-depth: 2
