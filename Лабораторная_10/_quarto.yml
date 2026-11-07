@@ -1,0 +1,26 @@
+project:
+  title: "Лабораторная работа № 10"
+  output-dir: "_output"
+
+lang: ru-RU
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.2
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2.5cm
+      - right=1.5cm
+    toc: true
+    toc-title: "Содержание"
+    toc-depth: 3
+    number-sections: true
+    colorlinks: true
